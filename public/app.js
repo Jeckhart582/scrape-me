@@ -1,7 +1,7 @@
 //Grabs the "articles" JSON that was scrape and appends text with p tags to our HTML id
 $.getJSON("/articles", function(data) {
     for (var i = 0; i < data.length; i++) {
-      $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
+      $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>" + "<br />" + "<p id=titleinput>" + "<br />" + "<p id=bodyinput>" + "</p>");
     }
   });
   
@@ -23,8 +23,9 @@ $(document).on("click", "p", function() {
         $("#notes").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");
 
         if (data.note) {
-            $("#titleinput").val(data.note.title);
-            $("#bodyinput").val(data.note.body);
+
+            $("#titleinput").text(data.note.title);
+            $("#bodyinput").text(data.note.body);
         }
     });
 });
