@@ -21,7 +21,9 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/scraperdb", { useNewUrlParser: true });
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scraperdb";
+
+mongoose.connect(MONGODB_URI);
 
 app.get("/scrape", function (req, res) {
     axios.get("http://www.echojs.com/").then(function (response) {
