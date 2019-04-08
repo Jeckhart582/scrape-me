@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scraperdb";
+var MONGODB_URI = process.env.MONGODB_URI
 
 mongoose.connect(MONGODB_URI);
 
