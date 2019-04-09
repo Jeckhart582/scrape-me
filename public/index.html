@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <title>Scraping With Mongoose</title>
     <style>
-      body { background-color: #F2F6D0 }
+      body { 
+        background: url("assets/sun-pattern.png") }
+
       #wrapper {
         width: 960px;
         margin-left: auto;
@@ -17,19 +19,30 @@
         overflow: auto;
         width: 60%;
         height: 700px;
+        border: outset;
+        background: grey;
+        padding: 5px;
       }
       #notes {
         float: right;
         width: 30%;
       }
+      h1, h2 {
+        text-align: center;
+      }
       textarea, input {
         display: block;
         width: 100%;
         background-color: #FCF5C7;
+        border-radius: 5px;
       }
       input {
         height: 36px;
         font-size: 24px;
+      }
+      p {
+        text-align: center;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
       }
       textarea {
         height: 200px;
@@ -39,7 +52,8 @@
   </head>
   <body>
     <div id="wrapper">
-      <h1>Note Scraper</h1>
+      <h1>Your Source for Daily Gaming News</h1>
+      <h2>Click an article title to add a note</h2>
       <div id="articles"></div>
       <div id="notes"></div>
     </div>

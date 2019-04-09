@@ -21,21 +21,17 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
-var MONGODB_URI = process.env.MONGODB_URI
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scraperdb";
 
 mongoose.connect(MONGODB_URI);
 
 app.get("/scrape", function (req, res) {
-    axios.get("http://www.echojs.com/").then(function (response) {
+    axios.get("https://old.reddit.com/r/Games/").then(function (response) {
         var $ = cheerio.load(response.data);
-        $("article h2").each(function (i, element) {
+        $("p.title").each(function (i, element) {
             var result = {};
-            result.title = $(this)
-                .children("a")
-                .text();
-            result.link = $(this)
-                .children("a")
-                .attr("href");
+            result.title = $(this).text();
+            result.link = $(this).children("a").attr("href");
 
             db.Article.create(result)
                 .then(function (dbArticle) {
@@ -46,6 +42,7 @@ app.get("/scrape", function (req, res) {
                 })
         });
         res.send("Scrape Complete");
+
     });
 });
 
@@ -82,6 +79,16 @@ app.post("/articles/:id", function (req, res) {
             res.json(err)
         });
 });
+
+app.get("/delete/:id/", function (req, res) {
+    db.Note.remove({ _id: req.params.id }, { title: [db.Note.title] }, {
+        body: [db.Note.title]
+    },
+        function (removed) {
+            res.send(removed)
+        }
+    );
+})
 
 
 
