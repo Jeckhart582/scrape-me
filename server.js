@@ -6,21 +6,16 @@ var cheerio = require("cheerio");
 
 // Require all models
 var db = require("./models");
-var PORT = process.env.PRT || 3000;
+var PORT = process.env.PORT || 3000;
 
 var app = express();
 
-// Configure middleware
 
-// Use morgan logger for logging requests
 app.use(logger("dev"));
-// Parse request body as JSON
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// Make public a static folder
 app.use(express.static("public"));
 
-// Connect to the Mongo DB
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scraperdb";
 
 mongoose.connect(MONGODB_URI);
